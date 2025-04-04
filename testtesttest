@@ -1,1 +1,23 @@
 Hello ladies and gents
+
+
+path = "D:\A_MAIN_EEE4_School\gakki-ni-sannen\3014\lpo.wav";
+%read data
+[data, fs] = audioread(path);
+fftdat = fft(data);
+N = length(fftdat);
+index = -(N/2) : (N/2)-1;
+magn = abs(fftdat);
+fax = index.*fs/N;
+%do plot
+figure(1);
+plot(fax, magn);
+figure(2);
+filt = fir1(50, [0.25, 0.75], 'bandpass');
+filtaud = filter(filt, 1, data);
+fftdat = fft(filtaud);
+N = length(fftdat);
+index = -(N/2) : (N/2)-1;
+magn = abs(fftdat);
+fax = index.*fs/N;
+plot(fax, magn);
